@@ -19,7 +19,7 @@ npm run build
 npm run preview
 ```
 
-Deploy the `dist/` folder. Images are served from `public/images` (symlinked to `../images`).
+Deploy the `dist/` folder. Static images live in `public/images/` and are copied into the build output automatically.
 
 ## Features
 
