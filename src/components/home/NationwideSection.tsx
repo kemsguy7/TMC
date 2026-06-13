@@ -23,7 +23,7 @@ const NationwideSection = () => (
           </h2>
           <p className="mt-6 text-muted text-lg leading-relaxed">
             We run a network of workshops and aftersales outlets / Service partners in Lagos and in 31 states
-            in Nigeria.
+            in Nigeria — supporting retail customers and corporate fleets nationwide.
           </p>
           <div className="mt-8 flex items-start gap-4 p-6 rounded-2xl bg-surface border border-navy/5">
             <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
@@ -45,8 +45,8 @@ const NationwideSection = () => (
           className="relative rounded-2xl overflow-hidden shadow-card-hover aspect-[4/3]"
         >
           <img
-            src="/images/workshop-equipment.jpg"
-            alt="Truckmasters workshop facility"
+            src="/images/IMG_3551.jpg"
+            alt="Truckmasters workshop and customer service"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />

@@ -7,8 +7,8 @@ const Footer = () => (
       <div className="lg:col-span-2">
         <img src="/images/truck-masters-logo.png" alt="Truckmasters" className="h-12 mb-4 brightness-0 invert" />
         <p className="text-white/75 max-w-md leading-relaxed">
-          Automotive therapy for Nigeria&apos;s fleets — sales, workshop, diagnostics, and nationwide support.
-          We sell peace of mind.
+          Automotive therapy for retail customers and fleets across Nigeria — sales, workshop, diagnostics, and
+          nationwide support. We sell peace of mind.
         </p>
       </div>
       <div>
@@ -26,6 +26,7 @@ const Footer = () => (
           <li>Sales: {CONTACT.sales}</li>
           <li>Service: {CONTACT.service}</li>
           <li>{CONTACT.email}</li>
+          <li>{CONTACT.hours}</li>
           <li className="pt-2">{CONTACT.address}</li>
         </ul>
         <div className="flex gap-3 mt-4">

@@ -8,20 +8,34 @@ const AboutPage = () => (
     <PageHero
       eyebrow="About Us"
       title="Nigeria's largest multi-brand vehicle workshop"
-      description="Operating since 2013 with a focus on enhancing fleet performance and reducing operational costs."
+      description="Serving retail customers and corporate fleets since 2013 — with a focus on quality, transparency, and peace of mind."
     />
     <AnimatedSection className="section-pad">
       <div className="container-tm max-w-4xl">
         <SectionHeading
           align="left"
           title="Who we are"
-          description="Truckmasters Nigeria Limited stands as one of Nigeria's largest multi-brand vehicle workshops. Our services aim to enhance fleet performance and reduce operational costs for corporate organisations nationwide."
+          description="Truckmasters Nigeria Limited stands as one of Nigeria's largest multi-brand vehicle workshops. We support individual car owners and corporate organisations with sales, servicing, diagnostics, and fleet solutions nationwide."
         />
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 overflow-hidden rounded-3xl shadow-card-hover"
+        >
+          <img
+            src="/images/Background12.jpg"
+            alt="Truckmasters showroom with Hyundai vehicles on display"
+            className="aspect-[21/9] w-full object-cover"
+          />
+        </motion.div>
+
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           {[
             {
               title: 'Industry Leadership',
-              text: 'Operating since 2013, we focus on fleet performance and cost reduction for corporate clients across Nigeria.',
+              text: 'Operating since 2013, we deliver trusted automotive care for retail customers and fleet operators across Nigeria.',
             },
             {
               title: 'Multi-Brand Excellence',

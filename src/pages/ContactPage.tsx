@@ -10,7 +10,7 @@ const cards = [
   { icon: Phone, label: 'Service', value: CONTACT.service, href: `tel:${CONTACT.service.replace(/\s/g, '')}` },
   { icon: Mail, label: 'Email', value: CONTACT.email, href: `mailto:${CONTACT.email}` },
   { icon: MapPin, label: 'Address', value: CONTACT.address, href: CONTACT.mapsUrl },
-  { icon: Clock, label: 'Hours', value: 'Mon–Fri 9am–6:30pm · Sat 9am–5:30pm', href: undefined },
+  { icon: Clock, label: 'Hours', value: CONTACT.hours, href: undefined },
 ];
 
 const ContactPage = () => (
@@ -18,7 +18,7 @@ const ContactPage = () => (
     <PageHero
       eyebrow="Contact"
       title="Visit our showroom & workshop"
-      description="Our team in Ikeja, Lagos is ready to assist with all your automotive needs."
+      description="Our team in Ikeja, Lagos is ready to assist retail customers and fleet operators with all your automotive needs."
     />
     <AnimatedSection className="section-pad">
       <div className="container-tm">

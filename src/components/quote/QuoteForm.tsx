@@ -115,7 +115,7 @@ const QuoteForm = () => {
           className={inputClass}
           value={form.message}
           onChange={update('message')}
-          placeholder="Tell us about your fleet or vehicle needs..."
+          placeholder="Tell us about your vehicle, fleet, or service needs..."
         />
       </div>
 

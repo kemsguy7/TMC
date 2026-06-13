@@ -12,7 +12,7 @@ const ServicesPreview = () => (
       <SectionHeading
         eyebrow="What We Offer"
         title="Complete Automotive Solutions"
-        description="From electricals and body work to fleet consultancy and mobile workshops — one partner for your entire fleet."
+        description="From retail vehicle sales and health checks to fleet consultancy and mobile workshops — one partner for every driver and every fleet."
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

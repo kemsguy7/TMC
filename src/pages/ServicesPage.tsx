@@ -10,15 +10,15 @@ const ServicesPage = () => (
   <>
     <PageHero
       eyebrow="Services"
-      title="Everything your fleet needs"
-      description="From diagnostics and detailing to fleet consultancy and mobile workshops."
+      title="Everything your vehicles need"
+      description="From retail sales and health checks to fleet consultancy and mobile workshops."
       backgroundImage="/images/workshop-equipment.jpg"
     />
     <AnimatedSection className="section-pad bg-surface">
       <div className="container-tm">
         <SectionHeading
           title="Our full service catalogue"
-          description="Professional automotive therapy — one partner for maintenance, sales, and fleet excellence."
+          description="Professional automotive therapy — one partner for retail customers, fleet operators, and nationwide excellence."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {SERVICES.map((service, index) => (

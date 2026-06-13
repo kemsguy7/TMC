@@ -1,5 +1,5 @@
 export const CONTACT = {
-  sales: '+234 704 305 0201',
+  sales: '+234 906 755 0214',
   salesAlt: '+234 805 571 4780',
   service: '+234 803 302 1757',
   care: '+234 818 895 3557',
@@ -7,7 +7,8 @@ export const CONTACT = {
   salesEmail: 'truckmasters31@gmail.com',
   address: 'No.2 Truckmasters Close, Off Opebi Link Road, Oregun, Ikeja, Lagos, Nigeria',
   mapsUrl: 'https://maps.app.goo.gl/83ZqTHoTMSU9Q4iu9',
-  whatsapp: 'https://wa.me/2347043050201',
+  whatsapp: 'https://wa.me/2349067550214',
+  hours: 'Mon–Fri 9am–6:30pm · Sat 9am–2pm',
   facebook: 'https://www.facebook.com/truckmasters1',
   instagram: 'https://www.instagram.com/truckmastersng/',
   linkedin: 'https://linkedin.com/company/truckmasters-nigeria-limited/',
@@ -32,8 +33,9 @@ export const SERVICES = [
     icon: 'wind',
   },
   {
-    title: 'Professional Detailing',
-    description: 'Premium interior and exterior detailing — deep cleaning and restoration inside and out.',
+    title: 'Vehicle Refurbishment Services',
+    description:
+      'Comprehensive vehicle refurbishment solutions, including interior restoration, exterior repairs, paint correction, cosmetic enhancements, and component reconditioning to restore vehicles to optimal condition and appearance.',
     icon: 'sparkles',
   },
   {
@@ -42,8 +44,9 @@ export const SERVICES = [
     icon: 'car',
   },
   {
-    title: 'Computerised Checks',
-    description: 'Advanced diagnostics for everyday servicing and fleet consultancy — including trucks.',
+    title: 'Vehicle Health Check',
+    description:
+      'Thorough vehicle health assessments covering engine, electrical, safety, and performance systems — for retail owners and fleet operators alike.',
     icon: 'cpu',
   },
   {
@@ -168,8 +171,22 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: '9',
     src: '/images/Background12.jpg',
-    title: 'Facility Operations',
+    title: 'Showroom & Vehicle Display',
     category: 'Workshop',
     span: 'wide',
+  },
+  {
+    id: '10',
+    src: '/images/IMG_3551.jpg',
+    title: 'Showroom Experience',
+    category: 'Workshop',
+    span: 'normal',
+  },
+  {
+    id: '11',
+    src: '/images/IMG_3553.jpg',
+    title: 'Retail Vehicle Sales',
+    category: 'Workshop',
+    span: 'tall',
   },
 ];

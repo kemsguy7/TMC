@@ -11,7 +11,7 @@ const GalleryPreview = () => (
       <SectionHeading
         eyebrow="Gallery"
         title="See our work in action"
-        description="Facilities, fleet projects, training, and workshop operations across Nigeria."
+        description="Facilities, showroom, fleet projects, training, and workshop operations across Nigeria."
       />
       <BentoGallery items={GALLERY_ITEMS.slice(0, 6)} showFilters={false} />
       <div className="text-center mt-12">

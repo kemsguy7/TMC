@@ -6,10 +6,12 @@ import { STATS } from '../../data/site';
 
 const HeroSection = () => (
   <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-    <div
-      className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: 'url(/images/truck-fleet-main.jpg)' }}
-    />
+    <div className="absolute inset-0 overflow-hidden">
+      <div
+        className="absolute inset-0 scale-110 bg-cover bg-center blur-[4px]"
+        style={{ backgroundImage: 'url(/images/Background12.jpg)' }}
+      />
+    </div>
     <div className="absolute inset-0 bg-gradient-to-br from-navy-dark/95 via-navy/88 to-navy/75" />
 
     <motion.div
@@ -59,8 +61,8 @@ const HeroSection = () => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.75 }}
         >
-          Nigeria&apos;s trusted partner for fleet maintenance, diagnostics, vehicle sales, and nationwide
-          workshop coverage — serving corporate organisations across passenger and commercial vehicles.
+          Nigeria&apos;s trusted partner for retail vehicle sales, workshop services, and fleet support — from
+          individual drivers to corporate organisations across passenger and commercial vehicles.
         </motion.p>
 
         <motion.div

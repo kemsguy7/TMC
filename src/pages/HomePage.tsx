@@ -3,7 +3,9 @@ import ClientsSection from '../components/home/ClientsSection';
 import GalleryPreview from '../components/home/GalleryPreview';
 import HeroSection from '../components/home/HeroSection';
 import NationwideSection from '../components/home/NationwideSection';
+import RetailSection from '../components/home/RetailSection';
 import ServicesPreview from '../components/home/ServicesPreview';
+import VideoShowcase from '../components/home/VideoShowcase';
 import AnimatedSection from '../components/ui/AnimatedSection';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../data/site';
@@ -12,6 +14,8 @@ const HomePage = () => (
   <>
     <HeroSection />
     <ServicesPreview />
+    <VideoShowcase />
+    <RetailSection />
     <NationwideSection />
     <BrandsStrip />
     <GalleryPreview />
@@ -27,7 +31,7 @@ const HomePage = () => (
           Ready for automotive peace of mind?
         </h2>
         <p className="text-white/80 max-w-xl mx-auto mb-8">
-          Get a tailored quote for workshop services, fleet support, or vehicle sales.
+          Get a tailored quote for workshop services, vehicle sales, fleet support, or personal vehicle care.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/quote" className="btn-primary">
