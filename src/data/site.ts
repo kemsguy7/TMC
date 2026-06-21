@@ -23,58 +23,69 @@ export const STATS = [
 
 export const SERVICES = [
   {
+    slug: 'electricals',
     title: 'Electricals',
     description: 'Expert automotive electrical diagnostics and repairs for passenger and commercial vehicles.',
     icon: 'zap',
   },
   {
+    slug: 'ac-body-work',
     title: 'AC & Body Work',
     description: 'Climate control systems, body repairs, and panel work by certified technicians.',
     icon: 'wind',
   },
   {
+    slug: 'vehicle-refurbishment',
     title: 'Vehicle Refurbishment Services',
     description:
       'Comprehensive vehicle refurbishment solutions, including interior restoration, exterior repairs, paint correction, cosmetic enhancements, and component reconditioning to restore vehicles to optimal condition and appearance.',
     icon: 'sparkles',
   },
   {
+    slug: 'vehicle-sales',
     title: 'Vehicle Sales',
     description: 'Brand new and certified used cars with warranty support and transparent history.',
     icon: 'car',
   },
   {
+    slug: 'vehicle-health-check',
     title: 'Vehicle Health Check',
     description:
       'Thorough vehicle health assessments covering engine, electrical, safety, and performance systems — for retail owners and fleet operators alike.',
     icon: 'cpu',
   },
   {
+    slug: 'fleet-consultancy',
     title: 'Fleet Consultancy',
     description: 'Strategic fleet optimization, cost reduction, and performance enhancement programs.',
     icon: 'truck',
   },
   {
+    slug: 'fleet-inspection',
     title: 'Professional Fleet Inspection',
     description: 'Thorough compliance and safety inspections for corporate and commercial fleets.',
     icon: 'clipboard-check',
   },
   {
+    slug: 'diagnostics',
     title: 'Normal Diagnostics',
     description: 'Routine diagnostic services to keep your vehicles running reliably and efficiently.',
     icon: 'activity',
   },
   {
+    slug: 'spare-parts',
     title: 'Spare Parts Sales',
     description: 'Genuine OEM and quality aftermarket parts with nationwide availability.',
     icon: 'package',
   },
   {
+    slug: 'mobile-workshop',
     title: 'Mobile Workshop',
     description: 'On-site maintenance and emergency support — we come to you when you need us.',
     icon: 'map-pin',
   },
   {
+    slug: 'body-paint-booth',
     title: 'Computerized Body & Paint Booth',
     description: 'State-of-the-art body and paint facilities for factory-quality finishes.',
     icon: 'paintbrush',

@@ -1,107 +1,138 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import AnimatedCounter from '../ui/AnimatedCounter';
-import { STATS } from '../../data/site';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { GALLERY_ITEMS, SERVICES } from '../../data/site';
+import HeroCollage from './HeroCollage';
+import HeroStatsStrip from './HeroStatsStrip';
+import VehicleSearchForm from './VehicleSearchForm';
 
-const HeroSection = () => (
-  <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-    <div className="absolute inset-0 overflow-hidden">
-      <div
-        className="absolute inset-0 scale-110 bg-cover bg-center blur-[4px]"
-        style={{ backgroundImage: 'url(/images/Background12.jpg)' }}
-      />
-    </div>
-    <div className="absolute inset-0 bg-gradient-to-br from-navy-dark/95 via-navy/88 to-navy/75" />
+const collageImages = GALLERY_ITEMS.slice(0, 3);
 
-    <motion.div
-      className="absolute top-20 right-10 w-40 h-40 md:w-64 md:h-64 rounded-full bg-accent/25 blur-3xl"
-      animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
-      transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-    />
-    <motion.div
-      className="absolute bottom-20 left-10 w-32 h-32 md:w-48 md:h-48 rounded-full bg-white/10 blur-2xl"
-      animate={{ scale: [1, 0.85, 1], y: [0, -20, 0] }}
-      transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-    />
+const HeroSection = () => {
+  const navigate = useNavigate();
 
-    <div className="container-tm relative z-10 pt-8 pb-20 md:pb-28">
-      <div className="max-w-4xl">
-        <motion.span
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[0.2em] text-white/90 border border-white/30 bg-white/10 backdrop-blur-sm"
-        >
-          Automotive Therapy
-        </motion.span>
+  const handleServiceSelect = (slug: string) => {
+    if (!slug) return;
+    navigate(`/services#${slug}`);
+  };
 
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.1]"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <motion.span className="block" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 }}>
-            WE SELL
-          </motion.span>
-          <motion.span
-            className="block text-accent-light mt-1"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.55 }}
-          >
-            PEACE OF MIND
-          </motion.span>
-        </motion.h1>
-
-        <motion.p
-          className="mt-6 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.75 }}
-        >
-          Nigeria&apos;s trusted partner for retail vehicle sales, workshop services, and fleet support — from
-          individual drivers to corporate organisations across passenger and commercial vehicles.
-        </motion.p>
-
-        <motion.div
-          className="mt-10 flex flex-wrap gap-4"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.95 }}
-        >
-          <Link to="/quote" className="btn-primary">
-            Get a Quote
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link to="/services" className="inline-flex items-center gap-2 rounded-xl border-2 border-white/40 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-all">
-            Our Services
-          </Link>
-        </motion.div>
+  return (
+    <section className="relative bg-navy-dark">
+      {/* Background */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.12]"
+          style={{ backgroundImage: 'url(/images/Background12.jpg)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-dark via-navy-dark to-[#141d26]" />
       </div>
 
-      <motion.div
-        className="mt-16 md:mt-20 max-w-4xl rounded-2xl border border-white/20 bg-navy-dark/60 backdrop-blur-md p-2 md:p-4"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {STATS.map((stat, i) => (
-            <AnimatedCounter
-              key={stat.label}
-              value={stat.value}
-              suffix={stat.suffix}
-              label={stat.label}
-              delay={i * 0.1}
-            />
-          ))}
+      <div className="relative z-10">
+        {/* Main hero */}
+        <div className="container-tm">
+          <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-10rem)]">
+            {/* Vehicle search — desktop sidebar */}
+            <motion.aside
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="hidden w-full shrink-0 border-r border-white/[0.06] lg:block lg:w-[340px] xl:w-[380px]"
+            >
+              <div className="sticky top-24 px-8 py-16 xl:px-10 xl:py-20">
+                <VehicleSearchForm />
+              </div>
+            </motion.aside>
+
+            {/* Welcome + imagery */}
+            <div className="flex flex-1 flex-col justify-center px-0 py-14 sm:py-16 lg:py-20 lg:pl-16 xl:pl-24">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="max-w-xl"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-white/40">
+                  Automotive Therapy
+                </p>
+
+                <h1 className="mt-6 font-heading text-4xl font-semibold leading-[1.12] text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]">
+                  Welcome to
+                  <br />
+                  <span className="text-white/90">Truck Masters</span>
+                </h1>
+
+                <p className="mt-8 text-base leading-[1.8] text-white/55 sm:text-lg sm:leading-[1.85]">
+                  Nigeria&apos;s trusted partner for vehicle sales, expert servicing, and fleet
+                  support — serving individual drivers and corporate organisations nationwide.
+                </p>
+
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <Link to="/quote" className="btn-primary">
+                    Get a Quote
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-white"
+                  >
+                    View all services
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+
+                {/* Services — understated */}
+                <div className="mt-14 border-t border-white/[0.08] pt-10">
+                  <label
+                    htmlFor="hero-service-select"
+                    className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40"
+                  >
+                    Browse by service
+                  </label>
+                  <div className="relative max-w-sm">
+                    <select
+                      id="hero-service-select"
+                      defaultValue=""
+                      onChange={(e) => handleServiceSelect(e.target.value)}
+                      className="w-full appearance-none border-b border-white/20 bg-transparent py-3 pr-8 text-sm text-white/80 transition-colors focus:border-white/40 focus:outline-none"
+                    >
+                      <option value="" disabled className="text-navy">
+                        Select a service
+                      </option>
+                      {SERVICES.map((service) => (
+                        <option key={service.slug} value={service.slug} className="text-navy">
+                          {service.title}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Editorial imagery */}
+              <motion.div
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+                className="mt-16 w-full max-w-2xl lg:mt-20"
+              >
+                <HeroCollage images={collageImages} />
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </section>
-);
+
+        {/* Mobile / tablet search — own spacious band */}
+        <div className="border-t border-white/[0.06] bg-[#141d26] lg:hidden">
+          <div className="container-tm px-4 py-14 sm:py-16">
+            <VehicleSearchForm />
+          </div>
+        </div>
+
+        <HeroStatsStrip />
+      </div>
+    </section>
+  );
+};
 
 export default HeroSection;

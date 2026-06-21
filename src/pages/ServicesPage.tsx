@@ -24,6 +24,7 @@ const ServicesPage = () => (
           {SERVICES.map((service, index) => (
             <motion.article
               key={service.title}
+              id={service.slug}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

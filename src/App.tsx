@@ -5,6 +5,7 @@ import ContactPage from './pages/ContactPage';
 import GalleryPage from './pages/GalleryPage';
 import HomePage from './pages/HomePage';
 import QuotePage from './pages/QuotePage';
+import ShowroomPage from './pages/ShowroomPage';
 import ServicesPage from './pages/ServicesPage';
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
+        <Route path="showroom" element={<ShowroomPage />} />
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="quote" element={<QuotePage />} />
         <Route path="contact" element={<ContactPage />} />

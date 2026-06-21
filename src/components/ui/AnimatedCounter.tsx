@@ -29,17 +29,16 @@ const AnimatedCounter = ({ value, suffix = '', label, delay = 0 }: Props) => {
 
   return (
     <motion.div
-      className="text-center px-4 py-6 md:border-r md:border-white/20 last:md:border-r-0"
+      className="text-center px-2 py-2 sm:px-4"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ scale: 1.03 }}
     >
-      <p className="text-xs md:text-sm font-medium text-white/70 uppercase tracking-wider mb-2">
+      <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/45 sm:text-[11px]">
         {label}
       </p>
-      <p className="text-3xl md:text-4xl font-heading font-bold text-white">
+      <p className="text-2xl font-heading font-semibold text-white sm:text-3xl md:text-4xl">
         {display.toLocaleString()}
         {suffix}
       </p>
