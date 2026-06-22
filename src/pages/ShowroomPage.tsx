@@ -1,81 +1,118 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Gauge, Settings2 } from 'lucide-react';
-import { useMemo } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import AnimatedSection from '../components/ui/AnimatedSection';
-import PageHero from '../components/ui/PageHero';
+import ShowroomContact from '../components/showroom/ShowroomContact';
+import ShowroomToolbar, { type ViewMode } from '../components/showroom/ShowroomToolbar';
+import VehicleListingCard from '../components/showroom/VehicleListingCard';
+import VehicleSearchForm from '../components/showroom/VehicleSearchForm';
+import { useVehicles } from '../context/VehicleProvider';
 import {
-  MANUFACTURERS,
-  SHOWROOM_VEHICLES,
-  VEHICLE_TYPES,
   filterVehicles,
-  formatNaira,
+  paginateVehicles,
+  sortVehicles,
+  type SortOption,
+  type VehicleSearchParams,
 } from '../data/vehicles';
 
-const ShowroomPage = () => {
-  const [searchParams] = useSearchParams();
+const parseFilters = (searchParams: URLSearchParams): VehicleSearchParams => ({
+  type: searchParams.get('type') ?? undefined,
+  manufacturer: searchParams.get('manufacturer') ?? undefined,
+  model: searchParams.get('model') ?? undefined,
+  transmission: searchParams.get('transmission') ?? undefined,
+  mileage: searchParams.get('mileage') ?? undefined,
+  keywords: searchParams.get('keywords') ?? undefined,
+  min: searchParams.get('min') ?? undefined,
+  max: searchParams.get('max') ?? undefined,
+});
 
-  const filters = useMemo(
-    () => ({
-      type: searchParams.get('type') ?? undefined,
-      manufacturer: searchParams.get('manufacturer') ?? undefined,
-      model: searchParams.get('model') ?? undefined,
-      transmission: searchParams.get('transmission') ?? undefined,
-      mileage: searchParams.get('mileage') ?? undefined,
-      keywords: searchParams.get('keywords') ?? undefined,
-      min: searchParams.get('min') ?? undefined,
-      max: searchParams.get('max') ?? undefined,
-    }),
-    [searchParams],
+const ShowroomPage = () => {
+  const { vehicles, loading } = useVehicles();
+  const [searchParams] = useSearchParams();
+  const [sort, setSort] = useState<SortOption>('price-asc');
+  const [perPage, setPerPage] = useState(9);
+  const [view, setView] = useState<ViewMode>('grid');
+  const [page, setPage] = useState(1);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const filters = useMemo(() => parseFilters(searchParams), [searchParams]);
+
+  const filtered = useMemo(() => filterVehicles(vehicles, filters), [vehicles, filters]);
+  const sorted = useMemo(() => sortVehicles(filtered, sort), [filtered, sort]);
+  const totalPages = Math.max(1, Math.ceil(sorted.length / perPage));
+  const paginated = useMemo(
+    () => paginateVehicles(sorted, page, perPage),
+    [sorted, page, perPage],
   );
 
-  const results = useMemo(() => filterVehicles(SHOWROOM_VEHICLES, filters), [filters]);
+  useEffect(() => {
+    setPage(1);
+  }, [searchParams, sort, perPage]);
 
-  const hasFilters = Object.values(filters).some(Boolean);
-
-  const labelFor = (options: { value: string; label: string }[], value?: string) =>
-    options.find((o) => o.value === value)?.label;
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
 
   return (
-    <>
-      <PageHero
-        eyebrow="Showroom"
-        title="Find your next vehicle"
-        description="Browse our current selection of passenger cars, SUVs, and commercial vehicles. Refine your search or speak with our sales team."
-        backgroundImage="/images/IMG_3553.jpg"
-      />
+    <div className="flex min-h-screen flex-col bg-surface lg:flex-row">
+      {/* Sidebar — desktop */}
+      <aside className="hidden shrink-0 border-r border-white/[0.06] bg-navy-dark lg:block lg:w-[360px] xl:w-[380px]">
+        <div className="sticky top-[4.5rem] max-h-[calc(100vh-4.5rem)] overflow-y-auto px-8 py-12 xl:px-10">
+          <VehicleSearchForm syncFromUrl submitLabel="Find your next vehicle" />
+          <ShowroomContact />
+        </div>
+      </aside>
 
-      <AnimatedSection className="section-pad bg-surface">
-        <div className="container-tm">
-          {hasFilters && (
-            <div className="mb-8 flex flex-wrap gap-2">
-              {filters.type && (
-                <FilterTag label={labelFor(VEHICLE_TYPES, filters.type) ?? filters.type} />
-              )}
-              {filters.manufacturer && (
-                <FilterTag label={labelFor(MANUFACTURERS, filters.manufacturer) ?? filters.manufacturer} />
-              )}
-              {filters.model && <FilterTag label={filters.model} />}
-              {filters.transmission && <FilterTag label={filters.transmission} />}
-              {filters.keywords && <FilterTag label={`"${filters.keywords}"`} />}
-              {(filters.min || filters.max) && (
-                <FilterTag
-                  label={`${formatNaira(Number(filters.min ?? 0))} – ${formatNaira(Number(filters.max ?? 300_000_000))}`}
-                />
-              )}
+      {/* Main content */}
+      <main className="min-w-0 flex-1">
+        {/* Mobile filter toggle */}
+        <div className="border-b border-navy/10 bg-white px-4 py-4 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen((v) => !v)}
+            className="flex w-full items-center justify-between rounded-lg border border-navy/10 bg-surface px-4 py-3 text-sm font-semibold text-navy"
+          >
+            <span>Vehicle search & filters</span>
+            <ChevronRight
+              className={`h-4 w-4 transition-transform ${mobileFiltersOpen ? 'rotate-90' : ''}`}
+            />
+          </button>
+        </div>
+
+        {mobileFiltersOpen && (
+          <div className="border-b border-white/[0.06] bg-navy-dark px-6 py-10 lg:hidden">
+            <VehicleSearchForm syncFromUrl showHeader={false} submitLabel="Find your next vehicle" />
+            <ShowroomContact />
+          </div>
+        )}
+
+        <div className="px-4 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14 xl:px-16">
+          <header className="mb-10">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-muted">Inventory</p>
+            <h1 className="mt-2 font-heading text-3xl font-semibold text-navy sm:text-4xl">Showroom</h1>
+          </header>
+
+          <ShowroomToolbar
+            total={sorted.length}
+            sort={sort}
+            perPage={perPage}
+            view={view}
+            onSortChange={setSort}
+            onPerPageChange={setPerPage}
+            onViewChange={setView}
+          />
+
+          {loading ? (
+            <div className="mt-12 rounded-2xl border border-navy/10 bg-white px-8 py-16 text-center shadow-card">
+              <p className="text-muted">Loading showroom inventory…</p>
             </div>
-          )}
-
-          {results.length === 0 ? (
-            <div className="rounded-2xl border border-navy/10 bg-white p-12 text-center shadow-card">
-              <h2 className="text-2xl font-heading font-bold text-navy">No vehicles match your search</h2>
-              <p className="mx-auto mt-3 max-w-md text-muted">
-                Try adjusting your filters or contact our sales team — we regularly update our showroom inventory.
+          ) : sorted.length === 0 ? (
+            <div className="mt-12 rounded-2xl border border-navy/10 bg-white px-8 py-16 text-center shadow-card">
+              <h2 className="font-heading text-2xl font-semibold text-navy">No vehicles found</h2>
+              <p className="mx-auto mt-3 max-w-md text-muted leading-relaxed">
+                Adjust your filters or contact our sales team — we update our showroom regularly.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <Link to="/" className="btn-outline">
-                  Back to search
-                </Link>
                 <Link to="/contact" className="btn-primary">
                   Contact sales
                 </Link>
@@ -83,68 +120,72 @@ const ShowroomPage = () => {
             </div>
           ) : (
             <>
-              <p className="mb-8 text-muted">
-                Showing <strong className="text-navy">{results.length}</strong> vehicle
-                {results.length !== 1 ? 's' : ''}
-                {hasFilters ? ' matching your criteria' : ''}
-              </p>
-
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {results.map((vehicle, index) => (
-                  <motion.article
+              <div
+                className={`mt-10 ${
+                  view === 'grid'
+                    ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3'
+                    : 'flex flex-col gap-5'
+                }`}
+              >
+                {paginated.map((vehicle, index) => (
+                  <motion.div
                     key={vehicle.id}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.06 }}
-                    className="overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-card transition-shadow hover:shadow-card-hover"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: index * 0.04 }}
                   >
-                    <div className="aspect-[4/3] overflow-hidden bg-navy-dark/5">
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.title}
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                        {labelFor(MANUFACTURERS, vehicle.manufacturer)} · {vehicle.year}
-                      </p>
-                      <h3 className="mt-1 text-xl font-heading font-semibold text-navy">{vehicle.title}</h3>
-                      <p className="mt-2 text-lg font-bold text-navy">{formatNaira(vehicle.price)}</p>
-
-                      <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted">
-                        <span className="inline-flex items-center gap-1.5">
-                          <Gauge className="h-4 w-4 text-accent" />
-                          {vehicle.mileage.toLocaleString()} km
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 capitalize">
-                          <Settings2 className="h-4 w-4 text-accent" />
-                          {vehicle.transmission}
-                        </span>
-                      </div>
-
-                      <Link
-                        to="/quote"
-                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover"
-                      >
-                        Enquire about this vehicle
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </motion.article>
+                    <VehicleListingCard vehicle={vehicle} view={view} />
+                  </motion.div>
                 ))}
               </div>
+
+              {totalPages > 1 && (
+                <nav
+                  className="mt-14 flex items-center justify-center gap-2"
+                  aria-label="Pagination"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={page === 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-navy/10 bg-white text-navy transition-colors hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Previous page"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => setPage(n)}
+                      className={`flex h-10 min-w-[2.5rem] items-center justify-center rounded-lg border px-3 text-sm font-medium transition-colors ${
+                        page === n
+                          ? 'border-navy bg-navy text-white'
+                          : 'border-navy/10 bg-white text-navy hover:bg-surface'
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={page === totalPages}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-navy/10 bg-white text-navy transition-colors hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Next page"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </nav>
+              )}
             </>
           )}
         </div>
-      </AnimatedSection>
-    </>
+      </main>
+    </div>
   );
 };
-
-const FilterTag = ({ label }: { label: string }) => (
-  <span className="rounded-full bg-navy/5 px-3 py-1 text-xs font-medium text-navy">{label}</span>
-);
 
 export default ShowroomPage;

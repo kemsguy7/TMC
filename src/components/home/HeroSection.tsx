@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GALLERY_ITEMS, SERVICES } from '../../data/site';
 import HeroCollage from './HeroCollage';
 import HeroStatsStrip from './HeroStatsStrip';
-import VehicleSearchForm from './VehicleSearchForm';
+import VehicleSearchForm from '../showroom/VehicleSearchForm';
 
 const collageImages = GALLERY_ITEMS.slice(0, 3);
 

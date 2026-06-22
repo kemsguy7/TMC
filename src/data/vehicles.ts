@@ -18,8 +18,11 @@ export const MANUFACTURERS = [
 
 export const MODELS_BY_MANUFACTURER: Record<string, { value: string; label: string }[]> = {
   hyundai: [
+    { value: 'accent', label: 'Accent' },
     { value: 'elantra', label: 'Elantra' },
     { value: 'sonata', label: 'Sonata' },
+    { value: 'genesis', label: 'Genesis' },
+    { value: 'azera', label: 'Azera' },
     { value: 'tucson', label: 'Tucson' },
     { value: 'santa-fe', label: 'Santa Fe' },
     { value: 'creta', label: 'Creta' },
@@ -99,12 +102,29 @@ export type Vehicle = {
   year: number;
   image: string;
   keywords: string;
+  photoCount: number;
+  priceOnRequest?: boolean;
 };
 
-export const SHOWROOM_VEHICLES: Vehicle[] = [
+export const DEFAULT_SHOWROOM_VEHICLES: Vehicle[] = [
   {
     id: '1',
-    title: 'Hyundai Elantra Sport',
+    title: 'Hyundai Accent',
+    type: 'car',
+    manufacturer: 'hyundai',
+    model: 'accent',
+    transmission: 'auto',
+    mileage: 8000,
+    price: 0,
+    year: 2024,
+    image: '/images/IMG_3553.jpg',
+    keywords: 'accent sedan',
+    photoCount: 2,
+    priceOnRequest: true,
+  },
+  {
+    id: '2',
+    title: 'Hyundai Elantra',
     type: 'car',
     manufacturer: 'hyundai',
     model: 'elantra',
@@ -113,10 +133,55 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     price: 18500000,
     year: 2023,
     image: '/images/hero-slider.jpg',
-    keywords: 'sport sedan',
+    keywords: 'elantra sport sedan',
+    photoCount: 2,
   },
   {
-    id: '2',
+    id: '3',
+    title: 'Hyundai Genesis',
+    type: 'car',
+    manufacturer: 'hyundai',
+    model: 'genesis',
+    transmission: 'auto',
+    mileage: 15000,
+    price: 0,
+    year: 2022,
+    image: '/images/hero-background.jpg',
+    keywords: 'genesis luxury',
+    photoCount: 2,
+    priceOnRequest: true,
+  },
+  {
+    id: '4',
+    title: 'Hyundai Azera',
+    type: 'car',
+    manufacturer: 'hyundai',
+    model: 'azera',
+    transmission: 'auto',
+    mileage: 22000,
+    price: 0,
+    year: 2021,
+    image: '/images/Background12.jpg',
+    keywords: 'azera sedan',
+    photoCount: 2,
+    priceOnRequest: true,
+  },
+  {
+    id: '5',
+    title: 'Hyundai Santa Fe',
+    type: 'suv',
+    manufacturer: 'hyundai',
+    model: 'santa-fe',
+    transmission: 'auto',
+    mileage: 18000,
+    price: 35000000,
+    year: 2023,
+    image: '/images/IMG_3551.jpg',
+    keywords: 'santa fe suv',
+    photoCount: 3,
+  },
+  {
+    id: '6',
     title: 'Hyundai Tucson Premium',
     type: 'suv',
     manufacturer: 'hyundai',
@@ -125,11 +190,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 8500,
     price: 32000000,
     year: 2024,
-    image: '/images/IMG_3553.jpg',
-    keywords: 'suv premium',
+    image: '/images/vehicle-inspection.jpg',
+    keywords: 'tucson premium suv',
+    photoCount: 4,
   },
   {
-    id: '3',
+    id: '7',
     title: 'Toyota Corolla LE',
     type: 'car',
     manufacturer: 'toyota',
@@ -138,11 +204,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 22000,
     price: 15800000,
     year: 2022,
-    image: '/images/hero-background.jpg',
+    image: '/images/commercial-truck-1.jpg',
     keywords: 'corolla sedan',
+    photoCount: 2,
   },
   {
-    id: '4',
+    id: '8',
     title: 'Toyota Hilux Double Cab',
     type: 'truck',
     manufacturer: 'toyota',
@@ -151,11 +218,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 45000,
     price: 28500000,
     year: 2021,
-    image: '/images/commercial-truck-1.jpg',
-    keywords: 'pickup commercial',
+    image: '/images/flatbed-truck.jpg',
+    keywords: 'hilux pickup',
+    photoCount: 3,
   },
   {
-    id: '5',
+    id: '9',
     title: 'Honda CR-V Touring',
     type: 'suv',
     manufacturer: 'honda',
@@ -164,11 +232,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 18000,
     price: 29500000,
     year: 2023,
-    image: '/images/Background12.jpg',
+    image: '/images/workshop-equipment.jpg',
     keywords: 'crv touring',
+    photoCount: 2,
   },
   {
-    id: '6',
+    id: '10',
     title: 'Isuzu D-Max V-Cross',
     type: 'truck',
     manufacturer: 'isuzu',
@@ -177,11 +246,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 32000,
     price: 24800000,
     year: 2022,
-    image: '/images/flatbed-truck.jpg',
+    image: '/images/truck-lineup.jpg',
     keywords: 'dmax pickup',
+    photoCount: 2,
   },
   {
-    id: '7',
+    id: '11',
     title: 'Kia Sportage GT-Line',
     type: 'suv',
     manufacturer: 'kia',
@@ -190,11 +260,12 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 9500,
     price: 27500000,
     year: 2024,
-    image: '/images/IMG_3551.jpg',
+    image: '/images/truck-fleet-main.jpg',
     keywords: 'sportage gt',
+    photoCount: 3,
   },
   {
-    id: '8',
+    id: '12',
     title: 'Hyundai Sonata Limited',
     type: 'car',
     manufacturer: 'hyundai',
@@ -203,10 +274,16 @@ export const SHOWROOM_VEHICLES: Vehicle[] = [
     mileage: 15000,
     price: 21000000,
     year: 2023,
-    image: '/images/vehicle-inspection.jpg',
+    image: '/images/diesel-engine-training.jpg',
     keywords: 'sonata limited',
+    photoCount: 2,
   },
 ];
+
+/** @deprecated Use useVehicles() from VehicleProvider — kept as seed data */
+export const SHOWROOM_VEHICLES = DEFAULT_SHOWROOM_VEHICLES;
+
+export type VehicleInput = Omit<Vehicle, 'id'>;
 
 export const formatNaira = (amount: number) =>
   `NGN ${amount.toLocaleString('en-NG')}`;
@@ -218,6 +295,41 @@ export const formatNairaCompact = (amount: number) => {
   }
   if (amount >= 1_000) return `NGN ${(amount / 1_000).toFixed(0)}K`;
   return formatNaira(amount);
+};
+
+export const priceToIndex = (price: number): number => {
+  let index = 0;
+  for (let i = 0; i < PRICE_INCREMENTS.length; i++) {
+    if (PRICE_INCREMENTS[i] <= price) index = i;
+    else break;
+  }
+  return index;
+};
+
+export type SortOption = 'price-asc' | 'price-desc' | 'year-desc' | 'mileage-asc';
+
+export const sortVehicles = (vehicles: Vehicle[], sort: SortOption): Vehicle[] => {
+  const sorted = [...vehicles];
+  sorted.sort((a, b) => {
+    switch (sort) {
+      case 'price-asc':
+        return (a.priceOnRequest ? Infinity : a.price) - (b.priceOnRequest ? Infinity : b.price);
+      case 'price-desc':
+        return (b.priceOnRequest ? -1 : b.price) - (a.priceOnRequest ? -1 : a.price);
+      case 'year-desc':
+        return b.year - a.year;
+      case 'mileage-asc':
+        return a.mileage - b.mileage;
+      default:
+        return 0;
+    }
+  });
+  return sorted;
+};
+
+export const paginateVehicles = (vehicles: Vehicle[], page: number, perPage: number) => {
+  const start = (page - 1) * perPage;
+  return vehicles.slice(start, start + perPage);
 };
 
 export type VehicleSearchParams = {
@@ -249,7 +361,7 @@ export const filterVehicles = (vehicles: Vehicle[], params: VehicleSearchParams)
 
     const minPrice = params.min ? Number(params.min) : 0;
     const maxPrice = params.max ? Number(params.max) : Infinity;
-    if (vehicle.price < minPrice || vehicle.price > maxPrice) return false;
+    if (!vehicle.priceOnRequest && (vehicle.price < minPrice || vehicle.price > maxPrice)) return false;
 
     if (params.keywords) {
       const query = params.keywords.toLowerCase();
